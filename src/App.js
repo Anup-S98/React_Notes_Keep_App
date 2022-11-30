@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+// import Button from "react-bootstrap/Button";
+import React, { useState } from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import CreateNote from "./CreateNode";
+// import Notes from "./Notes";
+import NotesContainer from "./NotesContainer";
+import "./App.css";
 
 function App() {
+  const [insertNode, setInsertNode] = useState([]);
+
+  const addNotes = (note) => {
+    if (
+      Object.keys(note.title).length !== 0 &&
+      Object.keys(note.content).length !== 0
+    ) {
+      // alert("hello");
+      setInsertNode((preval) => {
+        return [...preval, note];
+      });
+     
+    }
+    // console.log(insertNode);
+  };
+
+  // const deleteNote=(preval,id)=>preval.filter((ele,index)=>{
+  //   return index !==id;
+  // })
+
+  // ((preval,id)=>preval.filter((elem,index)=>{
+  //   return index !== id;
+  // }))
+  // const sett=()
+
+  const deleteNotePro=(id)=>{
+    setInsertNode((preval)=>preval.filter((ele,index)=>{
+      return index !== id;
+    }))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <CreateNote passNote={addNotes} />
+      <NotesContainer newNote={insertNode} deleteNotePro={deleteNotePro}/>
+      <Footer />
+    </>
   );
 }
-
 export default App;
