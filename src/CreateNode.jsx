@@ -10,9 +10,9 @@ const CreateNote = (props) => {
     content: "",
   });
 
-  const ShowHideField = () => {
-    setExpand(!expand);
-  };
+  // const ShowHideField = () => {
+  //   setExpand(!expand);
+  // };
 
   const inputEvents = (e) => {
     const { name, value } = e.target;
@@ -48,7 +48,9 @@ const CreateNote = (props) => {
                 placeholder="Write Title..."
                 value={note.title}
                 name="title"
-                onDoubleClick={ShowHideField}
+                onClick={()=>setExpand(true)}
+                onDoubleClick={()=>{setExpand(false)}
+                }
                 onChange={inputEvents}
               />
               {expand ? (
